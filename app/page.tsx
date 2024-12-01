@@ -1,101 +1,103 @@
-import Image from "next/image";
-
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Heart } from 'lucide-react'
+import Image from "next/image"
+import Link from "next/link"
+import herosection from "../lib/herosection.jpg";
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const collaborators = [
+    { name: 'NCC', logo: '/placeholder.svg' },
+    { name: 'NSS', logo: '/placeholder.svg' },
+    { name: 'YMCA', logo: '/placeholder.svg' },
+  ]
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="min-h-screen">
+      <section className=" flex relative min-h-[600px] overflow-hidden space-x-12 mr-1">
+        
+        
+             <Image src={herosection} alt="herosection"
+             className="h-[400px] w-full space-x-12 mx-10 mt-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"/>
+       
+          <div className="max-w-xl text-left mt-7">
+            <h1 className="text-6xl font-bold mb-6 text-black max-w-2xl">
+              Save Life Donate Blood
+            </h1>
+            <p className="text-lg mb-8 text-gray-700">
+              Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+            <Button 
+              asChild
+              className="bg-black text-white hover:bg-gray-900 px-8 py-6 text-lg"
+            >
+              <Link href="/find-blood" className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                Get Blood Now
+              </Link>
+            </Button>
+          </div>
+      </section>
+
+      <section className=" container px-4">
+        <h2 className="text-3xl font-bold mb-12 text-center">Our Mission</h2>
+        <p className="max-w-3xl mx-auto text-center text-gray-600">
+          We are dedicated to connecting blood donors with those in need, creating a seamless platform for life-saving donations.
+        </p>
+      </section>
+
+      <section className="py-16 bg-gray-50">
+        <div className="container px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">How to get Blood?</h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {['Register', 'Search', 'Connect'].map((step, index) => (
+              <Card key={index} className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <CardContent className="pt-6">
+                  <div className="rounded-full w-12 h-12 bg-red-100 flex items-center justify-center mb-4">
+                    <Heart className="text-red-600" />
+                  </div>
+                  <h3 className="font-bold mb-2">{step}</h3>
+                  <p className="text-gray-600">
+                   <Link href="/find-blood">
+                    {step === 'Search' && 'Find available donors in your area'}
+                   </Link> 
+                   <Link href='/register'>
+                   {step === 'Register' && 'Create your account as a recipient'}
+                   </Link>
+                  <Link href='/contact'>
+                    {step === 'Connect' && 'Contact donors and arrange donation'}
+                  </Link>
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <section className="py-16 container px-4">
+        <h2 className="text-3xl font-bold mb-12 text-center">Our Collaborators</h2>
+        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {collaborators.map((collaborator, index) => (
+            <div key={index} className="aspect-square relative bg-gray-100 rounded-lg p-8 flex items-center justify-center">
+              <Image
+                src={collaborator.logo}
+                alt={collaborator.name}
+                width={200}
+                height={200}
+                className="object-contain opacity-50"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <h3 className="text-4xl font-bold text-gray-300">{collaborator.name}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center gap-2 mt-8">
+          <div className="w-2 h-2 rounded-full bg-gray-300" />
+          <div className="w-2 h-2 rounded-full bg-gray-900" />
+          <div className="w-2 h-2 rounded-full bg-gray-300" />
+        </div>
+      </section>
     </div>
-  );
+  )
 }
+
